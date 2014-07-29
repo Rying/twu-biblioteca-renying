@@ -31,4 +31,21 @@ public class BibliotecaApp {
         }
         return authorNames;
     }
+
+    public List getBookYears() {
+        List bookYears = new ArrayList();
+        for (Book book : books) {
+            bookYears.add(book.getYear());
+        }
+        return bookYears;
+    }
+
+    public String getBookDetails() {
+        String details = "";
+
+        for (Book book : books) {
+            details += book.getDetail();
+        }
+        return details;
+    }
 }

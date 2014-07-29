@@ -20,6 +20,7 @@ public class BibliotecaAppTest {
         books[0] = new Book("book1", "name1", "2011");
         books[1] = new Book("book2", "name2", "2012");
         books[2] = new Book("book3", "name3", "2013");
+        bibliotecaApp.setBooks(books);
     }
 
     @Test
@@ -29,7 +30,6 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_get_list_books() {
-        bibliotecaApp.setBooks(books);
         List bookNames = new ArrayList();
         bookNames.add("book1");
         bookNames.add("book2");
@@ -40,12 +40,36 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_get_book_author_list() {
-        bibliotecaApp.setBooks(books);
         List bookAuthors = new ArrayList();
         bookAuthors.add("name1");
         bookAuthors.add("name2");
         bookAuthors.add("name3");
 
         assertThat(bibliotecaApp.getBookAuthors().equals(bookAuthors), is(true));
+    }
+
+    @Test
+    public void should_get_book_year_list() {
+        List bookYears = new ArrayList();
+        bookYears.add("2011");
+        bookYears.add("2012");
+        bookYears.add("2013");
+
+        assertThat(bibliotecaApp.getBookYears().equals(bookYears), is(true));
+    }
+
+    @Test
+    public void should_list_books_details() {
+        String details = "book1\tname1\t2011\n" +
+                "book2\tname2\t2012\n" +
+                "book3\tname3\t2013\n";
+
+        assertThat(bibliotecaApp.getBookDetails().equals(details), is(true));
+    }
+
+    @Test
+    public void should_input_list_and_list_book_details() {
+
+//        assertThat(, )
     }
 }

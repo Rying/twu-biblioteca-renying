@@ -19,4 +19,12 @@ public class Book {
     public String getAuthorName() {
         return authorname;
     }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getDetail() {
+        return bookName + '\t' + authorname + '\t' + year + '\n';
+    }
 }

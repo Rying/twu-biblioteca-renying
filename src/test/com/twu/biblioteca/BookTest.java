@@ -21,8 +21,20 @@ public class BookTest {
     }
 
     @Test
-    public void should_get_book_details() {
+    public void should_get_book_author() {
 
         assertThat(book.getAuthorName().equals("name1"), is(true));
+    }
+
+    @Test
+    public void should_get_book_year() {
+
+        assertThat(book.getYear().equals("2011"), is(true));
+    }
+
+    @Test
+    public void should_get_detail() {
+
+        assertThat(book.getDetail().equals("book1\tname1\t2011\n"), is(true));
     }
 }
