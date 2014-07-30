@@ -5,9 +5,9 @@ import java.util.List;
 
 public class BibliotecaApp {
 
-    private Book[] books;
+    private List<Book> books;
 
-    public void setBooks(Book[] books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
 
@@ -18,24 +18,24 @@ public class BibliotecaApp {
 
     public List getListBooks() {
         List bookNames = new ArrayList();
-        for (Book book : books) {
-            bookNames.add(book.getBookName());
+        for (int index = 0; index < books.size(); index++) {
+            bookNames.add(books.get(index).getBookName());
         }
         return bookNames;
     }
 
     public List getBookAuthors() {
         List authorNames = new ArrayList();
-        for (Book book : books) {
-            authorNames.add(book.getAuthorName());
+        for (int index = 0; index < books.size(); index++) {
+            authorNames.add(books.get(index).getAuthorName());
         }
         return authorNames;
     }
 
     public List getBookYears() {
         List bookYears = new ArrayList();
-        for (Book book : books) {
-            bookYears.add(book.getYear());
+        for (int index = 0; index < books.size(); index++) {
+            bookYears.add(books.get(index).getYear());
         }
         return bookYears;
     }
@@ -57,7 +57,7 @@ public class BibliotecaApp {
 
     public String chooseOption(int input) {
         String option;
-        switch (input){
+        switch (input) {
             case 1:
                 option = getBookDetails();
                 break;
@@ -69,5 +69,12 @@ public class BibliotecaApp {
                 break;
         }
         return option;
+    }
+
+    public void checkOutBook(Book coBook) {
+        for (int index = 0;index<books.size();index++) {
+            if (coBook.equals(books.get(index)))
+                books.remove(index);
+        }
     }
 }

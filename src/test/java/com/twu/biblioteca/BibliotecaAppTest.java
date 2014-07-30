@@ -3,21 +3,23 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
 public class BibliotecaAppTest {
-    Book[] books = new Book[3];
+    List<Book> books = new ArrayList<Book>();
     BibliotecaApp bibliotecaApp = new BibliotecaApp();
 
     @Before
     public void setUp() throws Exception {
-        books[0] = new Book("book1", "name1", "2011");
-        books[1] = new Book("book2", "name2", "2012");
-        books[2] = new Book("book3", "name3", "2013");
+        books.add(new Book("book1", "name1", "2011"));
+        books.add(new Book("book2", "name2", "2012"));
+        books.add(new Book("book3", "name3", "2013"));
         bibliotecaApp.setBooks(books);
     }
 
@@ -91,5 +93,14 @@ public class BibliotecaAppTest {
     public void should_return_quit_when_option_is_2() {
 
         assertThat(bibliotecaApp.chooseOption(2), is("quit"));
+    }
+
+    @Test
+    public void should_check_out_book_will_not_appear_in_biblioteca() {
+        bibliotecaApp.checkOutBook(books.get(0));
+        String details = "book2\tname2\t2012\n" +
+                "book3\tname3\t2013\n";
+
+        assertThat(bibliotecaApp.getBookDetails(), is(details));
     }
 }
