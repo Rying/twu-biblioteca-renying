@@ -3,10 +3,8 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -68,8 +66,30 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_input_list_and_list_book_details() {
+    public void should_only_get_list_books_option_for_now() {
 
-//        assertThat(, )
+        assertThat(bibliotecaApp.getMainMenu(), is("You can choose a option\n" +
+                "1\tList Books\n"));
+    }
+
+    @Test
+    public void should_list_books_when_option_is_1() {
+        String details = "book1\tname1\t2011\n" +
+                "book2\tname2\t2012\n" +
+                "book3\tname3\t2013\n";
+
+        assertThat(bibliotecaApp.chooseOption(1), is(details));
+    }
+
+    @Test
+    public void should_give_notice_when_option_is_invalid() {
+
+        assertThat(bibliotecaApp.chooseOption(3), is("Select a valid option!"));
+    }
+
+    @Test
+    public void should_return_quit_when_option_is_2() {
+
+        assertThat(bibliotecaApp.chooseOption(2), is("quit"));
     }
 }

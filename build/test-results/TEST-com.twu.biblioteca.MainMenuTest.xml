@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.twu.biblioteca.MainMenuTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2014-07-30T12:35:30" hostname="CNyren.local" time="0.0010">
+  <properties/>
+  <testcase name="should_get_menu_content" classname="com.twu.biblioteca.MainMenuTest" time="0.0010"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -48,4 +48,26 @@ public class BibliotecaApp {
         }
         return details;
     }
+
+    public String getMainMenu() {
+        String mainMenuIterms = "You can choose a option\n";
+        mainMenuIterms += MainMenu.menuContent();
+        return mainMenuIterms;
+    }
+
+    public String chooseOption(int input) {
+        String option;
+        switch (input){
+            case 1:
+                option = getBookDetails();
+                break;
+            case 2:
+                option = "quit";
+                break;
+            default:
+                option = "Select a valid option!";
+                break;
+        }
+        return option;
+    }
 }
