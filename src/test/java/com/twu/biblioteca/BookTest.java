@@ -11,7 +11,7 @@ public class BookTest {
 
     @Before
     public void setUp() throws Exception {
-        book = new Book("book1", "name1", "2011");
+        book = new Book("book1", "name1", "2011", 1);
     }
 
     @Test
@@ -36,5 +36,23 @@ public class BookTest {
     public void should_get_detail() {
 
         assertThat(book.getDetail().equals("book1\tname1\t2011\n"), is(true));
+    }
+
+    @Test
+    public void should_get_number_of_the_book() {
+
+        assertThat(book.getNumLeft(), is(1));
+    }
+
+    @Test
+    public void should_check_out_one_book_number_of_the_book_less_one() {
+        book.checkOut();
+        assertThat(book.getNumLeft(), is(0));
+    }
+
+    @Test
+    public void should_return_book_number_added_one() {
+        book.returnBook();
+        assertThat(book.getNumLeft(), is(2));
     }
 }

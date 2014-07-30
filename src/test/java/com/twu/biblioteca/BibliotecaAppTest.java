@@ -12,15 +12,14 @@ import static org.junit.Assert.assertThat;
 
 
 public class BibliotecaAppTest {
-    List<Book> books = new ArrayList<Book>();
     BibliotecaApp bibliotecaApp = new BibliotecaApp();
+    Book book = new Book("book1", "name1", "2011", 1);
 
     @Before
     public void setUp() throws Exception {
-        books.add(new Book("book1", "name1", "2011"));
-        books.add(new Book("book2", "name2", "2012"));
-        books.add(new Book("book3", "name3", "2013"));
-        bibliotecaApp.setBooks(books);
+        bibliotecaApp.addBook(new Book("book1", "name1", "2011", 1));
+        bibliotecaApp.addBook(new Book("book2", "name2", "2012", 1));
+        bibliotecaApp.addBook(new Book("book3", "name3", "2013", 1));
     }
 
     @Test
@@ -97,10 +96,48 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_check_out_book_will_not_appear_in_biblioteca() {
-        bibliotecaApp.checkOutBook(books.get(0));
+        bibliotecaApp.checkOutBook(new Book("book1", "name1", "2011", 1));
         String details = "book2\tname2\t2012\n" +
                 "book3\tname3\t2013\n";
 
         assertThat(bibliotecaApp.getBookDetails(), is(details));
+    }
+
+    @Test
+    public void should_user_get_check_out_success_message_while_the_book_available() {
+
+        assertThat(bibliotecaApp.checkOutBook(book), is("Thank you! Enjoy the book"));
+    }
+
+    @Test
+    public void should_user_get_check_out_unsuccess_message_while_the_book_not_available() {
+        bibliotecaApp.checkOutBook(book);
+
+        assertThat(bibliotecaApp.checkOutBook(book), is("That book is not available."));
+    }
+
+    @Test
+    public void should_return_book_appear_in_the_bibioteca() {
+        String details = "book1\tname1\t2011\n" +
+                "book2\tname2\t2012\n" +
+                "book3\tname3\t2013\n";
+
+        bibliotecaApp.checkOutBook(book);
+        bibliotecaApp.returnBook(book);
+
+        assertThat(bibliotecaApp.getBookDetails(), is(details));
+    }
+
+    @Test
+    public void should_show_success_return_message_if_return_success() {
+
+        assertThat(bibliotecaApp.returnBook(book), is("Thank you for returning the book."));
+    }
+
+    @Test
+    public void should_show_unsuccess_return_message_if_return_faild() {
+        Book bookNotExit = new Book("book4", "name4", "2014", 1);
+        
+        assertThat(bibliotecaApp.returnBook(bookNotExit), is("That is not a valid book to return."));
     }
 }
