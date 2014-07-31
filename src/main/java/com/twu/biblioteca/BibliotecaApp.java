@@ -6,15 +6,20 @@ import java.util.List;
 public class BibliotecaApp {
 
     private List<Book> books;
+    private List<Movie> movies;
 
     public BibliotecaApp() {
         books = new ArrayList<Book>();
+        movies = new ArrayList<Movie>();
     }
 
     public void addBook(Book book) {
         books.add(book);
     }
 
+    public void addMovie(Movie movie) {
+        movies.add(movie);
+    }
 
     public String getWelcomeMessage() {
 
@@ -57,7 +62,7 @@ public class BibliotecaApp {
 
     public String getMainMenu() {
         String mainMenuIterms = "You can choose a option\n";
-        mainMenuIterms += MainMenu.menuContent();
+        mainMenuIterms += MainMenu.menuContents();
         return mainMenuIterms;
     }
 
@@ -68,7 +73,10 @@ public class BibliotecaApp {
                 option = getBookDetails();
                 break;
             case 2:
-                option = "quit";
+                option = MainMenu.QUIT.getContent();
+                break;
+            case 3:
+                option = getMovieDetails();
                 break;
             default:
                 option = "Select a valid option!";
@@ -81,7 +89,7 @@ public class BibliotecaApp {
         for (Book book : books) {
             if (coBook.equals(book)) {
                 if (book.checkOut())
-                    return "Thank you! Enjoy the book";
+                    return "Thank you! Enjoy the book.";
             }
         }
         return "That book is not available.";
@@ -97,4 +105,22 @@ public class BibliotecaApp {
         return "That is not a valid book to return.";
     }
 
+    public String getMovieDetails() {
+        String movieDetails = "";
+
+        for (Movie movie : movies) {
+            movieDetails += movie.getDetail();
+        }
+        return movieDetails;
+    }
+
+    public String checkOut(Movie coMovie) {
+        for (Movie movie : movies) {
+            if(coMovie.equals(movie)){
+                if(movie.checkOut())
+                    return "Thank you! Enjoy the movie.";
+            }
+        }
+        return "That movie is not available.";
+    }
 }

@@ -20,6 +20,10 @@ public class BibliotecaAppTest {
         bibliotecaApp.addBook(new Book("book1", "name1", "2011", 1));
         bibliotecaApp.addBook(new Book("book2", "name2", "2012", 1));
         bibliotecaApp.addBook(new Book("book3", "name3", "2013", 1));
+
+        bibliotecaApp.addMovie(new Movie("movie1", "director1", "2011", 1, 1));
+        bibliotecaApp.addMovie(new Movie("movie2", "director2", "2012", 2, 1));
+        bibliotecaApp.addMovie(new Movie("movie3", "director3", "2013", 3, 1));
     }
 
     @Test
@@ -70,7 +74,9 @@ public class BibliotecaAppTest {
     public void should_only_get_list_books_option_for_now() {
 
         assertThat(bibliotecaApp.getMainMenu(), is("You can choose a option\n" +
-                "1\tList Books\n"));
+                "1\tList Books\n" +
+                "2\tQuit\n" +
+                "3\tList Movies\n"));
     }
 
     @Test
@@ -85,13 +91,13 @@ public class BibliotecaAppTest {
     @Test
     public void should_give_notice_when_option_is_invalid() {
 
-        assertThat(bibliotecaApp.chooseOption(3), is("Select a valid option!"));
+        assertThat(bibliotecaApp.chooseOption(4), is("Select a valid option!"));
     }
 
     @Test
     public void should_return_quit_when_option_is_2() {
 
-        assertThat(bibliotecaApp.chooseOption(2), is("quit"));
+        assertThat(bibliotecaApp.chooseOption(2), is("Quit"));
     }
 
     @Test
@@ -106,7 +112,7 @@ public class BibliotecaAppTest {
     @Test
     public void should_user_get_check_out_success_message_while_the_book_available() {
 
-        assertThat(bibliotecaApp.checkOutBook(book), is("Thank you! Enjoy the book"));
+        assertThat(bibliotecaApp.checkOutBook(book), is("Thank you! Enjoy the book."));
     }
 
     @Test
@@ -137,7 +143,38 @@ public class BibliotecaAppTest {
     @Test
     public void should_show_unsuccess_return_message_if_return_faild() {
         Book bookNotExit = new Book("book4", "name4", "2014", 1);
-        
+
         assertThat(bibliotecaApp.returnBook(bookNotExit), is("That is not a valid book to return."));
+    }
+
+    @Test
+    public void should_list_movie_details() {
+        String details = "movie1\tdirector1\t2011\t1\n" +
+                "movie2\tdirector2\t2012\t2\n" +
+                "movie3\tdirector3\t2013\t3\n";
+
+        assertThat(bibliotecaApp.getMovieDetails(), is(details));
+    }
+
+    @Test
+    public void should_List_movies_when_input_3() {
+        String details = "movie1\tdirector1\t2011\t1\n" +
+                "movie2\tdirector2\t2012\t2\n" +
+                "movie3\tdirector3\t2013\t3\n";
+
+        assertThat(bibliotecaApp.chooseOption(3), is(details));
+    }
+
+    @Test
+    public void should_check_out_movie_give_success_message_if_the_movie_available() {
+
+        assertThat(bibliotecaApp.checkOut(new Movie("movie1", "director1", "2011", 1, 1)), is("Thank you! Enjoy the movie."));
+    }
+
+    @Test
+    public void should_check_out_movie_give_unsuccess_message_if_the_movie_not_available() {
+        bibliotecaApp.checkOut(new Movie("movie1", "director1", "2011", 1, 1));
+
+        assertThat(bibliotecaApp.checkOut(new Movie("movie1", "director1", "2011", 1, 1)), is("That movie is not available."));
     }
 }
